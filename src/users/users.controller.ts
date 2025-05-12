@@ -6,17 +6,19 @@ import mongoose from 'mongoose';
 @Controller('users')
 export class UsersController {
 
-    constructor(private usersService: UsersService) {}
+    constructor(private readonly usersService: UsersService) {}
     
     
     @Post()
-    createUser(@Body() createUserDto: CreateUserDto) {
-        return this.usersService.createUser(createUserDto);
+    async createUser(@Body() createUserDto: CreateUserDto) {
+        const generatedId = await this.usersService.createUser(createUserDto);
+        return { message: "user added successfully", id: generatedId }
     }
 
     @Get()
-    getUsers() {
-        return this.usersService.getUsers()
+    async getUsers() {
+        const users = await this.usersService.getUsers()
+        return { message: "All users retrieved successfully", users}
     }
 
     @Get(":id")

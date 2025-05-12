@@ -8,13 +8,19 @@ import { CreateUserDto } from './dto/CreateUser.dto';
 export class UsersService {
     constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
-    createUser(createUserDto: CreateUserDto) {
+    async createUser(createUserDto: CreateUserDto) {
         const newUser = new this.userModel(createUserDto)
-        return newUser.save();
+        const result = await newUser.save();
+        return result.id as string;
     }
 
-    getUsers() {
-        return this.userModel.find()
+    async getUsers() {
+        const users = await this.userModel.find().exec()
+        return users.map((user) => ({
+            id: user.id,
+            userName: user.username,
+            Email: user.email
+        }))
     }
 
     getUserById(id: string) {
