@@ -8,4 +8,8 @@ import { CreateUserDto } from './dto/CreateUser.dto';
 export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
+    createUser(createUserDto: CreateUserDto) {
+        const newUser = new this.userModel(createUserDto)
+        return newUser.save();
+    }
 }
