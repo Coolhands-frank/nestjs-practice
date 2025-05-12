@@ -23,7 +23,12 @@ export class UsersService {
         }))
     }
 
-    getUserById(id: string) {
-        return this.userModel.findById(id)
+    async getUserById(id: string) {
+        const singleUser = await this.userModel.findById(id).exec()
+        return {
+            id: singleUser?.id,
+            userName: singleUser?.username,
+            email: singleUser?.email
+        }
     }
 }
