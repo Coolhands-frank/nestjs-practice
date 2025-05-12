@@ -6,7 +6,7 @@ import { CreateUserDto } from './dto/CreateUser.dto';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+    constructor(@InjectModel(User.name) private readonly userModel: Model<User>) {}
 
     createUser(createUserDto: CreateUserDto) {
         const newUser = new this.userModel(createUserDto)
@@ -15,5 +15,9 @@ export class UsersService {
 
     getUsers() {
         return this.userModel.find()
+    }
+
+    getUserById(id: string) {
+        return this.userModel.findById(id)
     }
 }
