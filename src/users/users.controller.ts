@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, HttpException, Patch } from '@nestjs/common'
+import { Controller, Post, Body, Get, Param, HttpException, Patch, Delete } from '@nestjs/common'
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/CreateUser.dto';
 import mongoose from 'mongoose';
@@ -41,6 +41,16 @@ export class UsersController {
         const updatedUser = await this.usersService.updateUser(id, updateUserDto)
         if (!updatedUser) throw new HttpException("user not found", 404)
         return { message: "user updated successfully" , updatedUser}
+    }
+
+    @Delete(":id")
+    async deleteUser(@Param("id") id: string) {
+        const isValid = mongoose.Types.ObjectId.isValid(id);
+        if (!isValid) throw new HttpException("Invalid ID", 404)
+        const deletedUser = await this.usersService.deleteUser(id)
+        if (!deletedUser) throw new HttpException("user not found", 404)
+        return { message: "User deleted Successfully", deletedUser}
+        
     }
 
 }
