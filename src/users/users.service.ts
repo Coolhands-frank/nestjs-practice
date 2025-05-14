@@ -19,7 +19,7 @@ export class UsersService {
         const users = await this.userModel.find().exec()
         return users.map((user) => ({
             id: user.id,
-            userName: user.username,
+            userName: user.userName,
             Email: user.email
         }))
     }
@@ -28,7 +28,7 @@ export class UsersService {
         const singleUser = await this.userModel.findById(id).exec()
         return {
             id: singleUser?.id,
-            userName: singleUser?.username,
+            userName: singleUser?.userName,
             email: singleUser?.email
         }
     }
