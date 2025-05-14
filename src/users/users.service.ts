@@ -20,7 +20,7 @@ export class UsersService {
         return users.map((user) => ({
             id: user.id,
             userName: user.userName,
-            Email: user.email
+            email: user.email
         }))
     }
 
