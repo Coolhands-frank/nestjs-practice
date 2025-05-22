@@ -10,11 +10,11 @@ export class UsersController {
     constructor(private readonly usersService: UsersService) {}
     
     
-    @Post()
-    async createUser(@Body() createUserDto: CreateUserDto) {
-        const generatedId = await this.usersService.createUser(createUserDto);
-        return { message: "user added successfully", id: generatedId }
-    }
+//    @Post()
+//    async createUser(@Body() createUserDto: CreateUserDto) {
+//        const generatedId = await this.usersService.createUser(createUserDto);
+//        return { message: "user added successfully", id: generatedId }
+//    }
 
     @Get()
     async getUsers() {
