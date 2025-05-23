@@ -19,7 +19,7 @@ export class CreateUserDto {
     password: string;
 
     @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     role: {
         type: String,
         enum: ['user', 'admin'], 

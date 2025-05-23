@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User } from 'src/schemas/User.schema';
@@ -27,15 +27,27 @@ export class UsersService {
         return findUser
     }
 
+    async getUserById(id: string): Promise<UserResponseDto | null> {
+        const userProfile = await this.userModel.findById(id).exec()
+        if (!userProfile) throw new HttpException("user profile not found", 404)
+        return {
+            id: userProfile.id,
+            userName: userProfile.userName,
+            email: userProfile.email,
+            displayName: userProfile.displayName,
+            role: userProfile.role
+        };
+    }
+
     async getUsers(): Promise<User[]> {
         const users = await this.userModel.find().exec()
         return users
     }
 
-    async getUserById(id: string): Promise<User | null> {
-        const singleUser = await this.userModel.findById(id).exec()
-        return singleUser
-    }
+//    async getUserById(id: string): Promise<User | null> {
+//        const singleUser = await this.userModel.findById(id).exec()
+//        return singleUser
+//    }
 
     async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<User | null> {
         const updatedUser = await this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true}).exec()
