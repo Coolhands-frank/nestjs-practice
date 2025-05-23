@@ -13,4 +13,17 @@ export class CreateUserDto {
     @IsString()
     @IsOptional()
     displayName?: string;
+
+    @IsString()
+    @IsNotEmpty()
+    password: string;
+
+    @IsString()
+    @IsOptional()
+    role: {
+        type: String,
+        enum: ['user', 'admin'], 
+        default: 'user',
+    }
+
 }
