@@ -38,26 +38,26 @@ export class UsersController {
 //        return findUser;
 //    }
 
-    @Patch(":id")
-    async updateUser(
-        @Param("id") id: string, 
-        @Body() updateUserDto: UpdateUserDto 
-    ) {
-        const isValid = mongoose.Types.ObjectId.isValid(id);
-        if (!isValid) throw new HttpException("Invalid ID", 404)
-        const updatedUser = await this.usersService.updateUser(id, updateUserDto)
-        if (!updatedUser) throw new HttpException("user not found", 404)
-        return { message: "user updated successfully" , updatedUser}
-    }
-
-    @Delete(":id")
-    async deleteUser(@Param("id") id: string) {
-        const isValid = mongoose.Types.ObjectId.isValid(id);
-        if (!isValid) throw new HttpException("Invalid ID", 404)
-        const deletedUser = await this.usersService.deleteUser(id)
-        if (!deletedUser) throw new HttpException("user not found", 404)
-        return { message: "User deleted Successfully", deletedUser}
-        
-    }
+//    @Patch(":id")
+//    async updateUser(
+//        @Param("id") id: string, 
+//        @Body() updateUserDto: UpdateUserDto 
+//    ) {
+//        const isValid = mongoose.Types.ObjectId.isValid(id);
+//        if (!isValid) throw new HttpException("Invalid ID", 404)
+//        const updatedUser = await this.usersService.updateUser(id, updateUserDto)
+//        if (!updatedUser) throw new HttpException("user not found", 404)
+//        return { message: "user updated successfully" , updatedUser}
+//    }
+//
+//    @Delete(":id")
+//    async deleteUser(@Param("id") id: string) {
+//        const isValid = mongoose.Types.ObjectId.isValid(id);
+//        if (!isValid) throw new HttpException("Invalid ID", 404)
+//        const deletedUser = await this.usersService.deleteUser(id)
+//        if (!deletedUser) throw new HttpException("user not found", 404)
+//        return { message: "User deleted Successfully", deletedUser}
+//        
+//    }
 
 }
