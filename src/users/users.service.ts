@@ -39,10 +39,10 @@ export class UsersService {
         };
     }
 
-    async getUsers(): Promise<User[]> {
-        const users = await this.userModel.find().exec()
-        return users
-    }
+//    async getUsers(): Promise<User[]> {
+//        const users = await this.userModel.find().exec()
+//        return users
+//    }
 
 //    async getUserById(id: string): Promise<User | null> {
 //        const singleUser = await this.userModel.findById(id).exec()
